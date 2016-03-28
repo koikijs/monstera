@@ -1,0 +1,99 @@
+@import "variables.less";
+
+.html{
+  background-color: @html-back;
+  color: @html-text;
+  font: "PT Sans",Helvetica,Arial,sans-serif;
+  font-size : 39%;
+}
+
+@media screen and (min-width: 610px){
+  .html{ font-size : 75%;}
+}
+
+@media screen and (min-width : 768px){
+  .html{ font-size : 87.5%;}
+}
+
+@media screen and (min-width : 1024px) {
+  .html{ font-size : 100%};
+}
+
+.register{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.createEvent{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 80%;
+  font-size: 6em;
+}
+
+.createEventMessageLeft{
+  text-align: left;
+}
+
+.createEventMessageRight{
+  text-align: right;
+}
+
+.createEventBoard{
+  text-align: center;
+  border: 3px solid;
+  border-radius: 10px;
+}
+
+.createEventTextbox{
+  width: 80%;
+  font-size: 0.8em;
+  border: none;
+  outline-style: none;
+}
+
+.controlButton{
+  position: relative;
+  margin-top: 100px;
+
+  a{
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    color: @html-text;
+    background-color: @html-back;
+    border: 5px solid @html-text;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 90px;
+  }
+
+  a:hover{
+    color: @html-back;
+    background-color: @html-text;
+    transition: background-color 0.15s, color 0.15s;
+  }
+}
+
+.prevButton{
+  left: 0;
+}
+.nextButton{
+  right: 0;
+}
+
+.calendar{
+  font-size: 0.5em;
+  th, td{
+    border: 1px solid @html-text;
+    padding: 0.3em;
+    width: 10%;
+  }
+}
