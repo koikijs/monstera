@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {ControlButton} from '../components';
 import {reduxForm} from 'redux-form';
-import {pushState} from 'redux-router';
+import {push} from 'react-router-redux';
 
 const validate = values => {
   const errors = {};
@@ -19,7 +19,9 @@ const validate = values => {
   state => ({
     routing: state.routing
   }),
-  {pushState}
+  {
+    push: push
+  }
 )
 @reduxForm({
   form: 'eventName',
@@ -29,7 +31,7 @@ const validate = values => {
 export default class RegisterName extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
-    pushState: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired
   };
   render() {
@@ -39,19 +41,19 @@ export default class RegisterName extends Component {
       },
       handleSubmit
     } = this.props;
-    const DATE_URL = '/register/date';
+    const MEMBER_URL = '/register/member';
 
     const styles = require('../css/customize.less');
     return (
       <form onSubmit={handleSubmit(()=>{
         if ( ! name.error ) {
-          this.props.pushState(null, DATE_URL, '');
+          this.props.push(MEMBER_URL);
         }
       })}>
         <div className={styles.createEventMessageLeft} >I will hold</div>
-        <div className={styles.createEventBoard} >&quot;<input className={styles.createEventTextbox} type="text" {...name} />&quot;</div>
+        <div className={styles.createEventBoard} >&quot;<input className={styles.createEventTextbox} type="text" {...name} autoComplete="off" />&quot;</div>
         <div className={styles.createEventMessageRight} >Event.</div>
-        <ControlButton prev={''} next={name.error ? '' : DATE_URL} />
+        <ControlButton prev={''} next={name.error ? '' : MEMBER_URL} />
       </form>
     );
   }
