@@ -36,7 +36,7 @@ passport.use(
   new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: 'http://monstera.herokuapp.com/auth/github/callback'
+    callbackURL: 'https://monstera.herokuapp.com/auth/github/callback'
   },
   function then(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
