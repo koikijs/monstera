@@ -16,7 +16,8 @@ import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-
+import passport from 'passport';
+import {Strategy as GitHubStrategy} from 'passport-github2';
 import bodyParser from 'body-parser';
 const pretty = new PrettyError();
 const app = new Express();
@@ -30,6 +31,34 @@ app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+passport.use(
+  new GitHubStrategy({
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: 'http://127.0.0.1:3000/auth/github/callback'
+  },
+  function then(accessToken, refreshToken, profile, done) {
+    // asynchronous verification, for effect...
+    process.nextTick(function ticked() {
+      // To keep the example simple, the user's GitHub profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the GitHub account with a user record in your database,
+      // and return that user instead.
+      return done(null, profile);
+    });
+  }
+));
+
+app.get('/login',
+  passport.authenticate('github'),
+  function then(req, res) {
+    console.log(req, res);
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    res.redirect('/users/' + req.user.username);
+  });
+
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
