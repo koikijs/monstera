@@ -1,21 +1,10 @@
-# Build RESTful API within 5 min
+# Event scheduler
+http://monstera.herokuapp.com
 
-## Running Example
-
-http://monstera.herokuapp.com/admin
-
-## Deploy on Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/sideroad/monstera)
+# Contribute
 
 ## Manual Installation
 You can also construct Monstera on your server.
-
-### Mongo URL
-Please set variable onto your environment or set `mongoURL` in `src/config.js`.
-
-### API Host, Port
-Please set API host, port in `src/config.js`.
 
 ### Starting application
 
@@ -25,11 +14,7 @@ npm start
 ```
 
 ## Usage
-
-http://localhost:3000/admin
-
-# Contribute
+http://localhost:3000
 
 ## Color schema
-
 https://coolors.co/app/fffb7a-222229-514299-968bce-c3bce8
