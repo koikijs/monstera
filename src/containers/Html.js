@@ -16,11 +16,12 @@ export default class Html extends Component {
   static propTypes = {
     assets: PropTypes.object,
     component: PropTypes.node,
-    store: PropTypes.object
+    store: PropTypes.object,
+    token: PropTypes.string
   }
 
   render() {
-    const {assets, component, store} = this.props;
+    const {assets, component, store, token} = this.props;
     const content = component ? ReactDOM.renderToString(component) : '';
     const styles = require('../css/customize.less');
     const head = Helmet.rewind();
@@ -44,7 +45,7 @@ export default class Html extends Component {
                   rel="stylesheet" type="text/css" charSet="UTF-8"/>
           )}
         </head>
-        <Body assets={assets} content={content} store={store} />
+        <Body assets={assets} content={content} store={store} token={token} />
       </html>
     );
   }

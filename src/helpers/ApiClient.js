@@ -8,11 +8,15 @@ const string = values => {
   ).join('&');
 };
 
-const getHeader = (req) => {
+const getHeader = (req, token) => {
   const headers = {};
 
   if (req) {
     headers.cookie = req.get('cookie');
+  }
+
+  if (token) {
+    headers.Authorization = 'token ' + token;
   }
 
   return {
@@ -21,13 +25,17 @@ const getHeader = (req) => {
   };
 };
 
-const postHeader = (values, req) => {
+const postHeader = (values, req, token) => {
   const headers = {
     'Content-Type': 'application/json'
   };
 
   if (req) {
     headers.cookie = req.get('cookie');
+  }
+
+  if (token) {
+    headers.Authorization = 'token ' + token;
   }
 
   return {
@@ -38,13 +46,17 @@ const postHeader = (values, req) => {
 };
 
 
-const deleteHeader = (values, req) => {
+const deleteHeader = (values, req, token) => {
   const headers = {
     'Content-Type': 'application/json'
   };
 
   if (req) {
     headers.cookie = req.get('cookie');
+  }
+
+  if (token) {
+    headers.Authorization = 'token ' + token;
   }
 
   return {
@@ -55,7 +67,7 @@ const deleteHeader = (values, req) => {
 };
 
 export default class ApiClient {
-  constructor(req) {
+  constructor(req, token) {
     this.fetchJSON = ( path = '/', method = 'GET', values = {} ) => {
       console.log('## fetch ', path, method, values);
 
@@ -66,9 +78,9 @@ export default class ApiClient {
         fetch( base + path +
                       (method === 'GET' ? '?' + string(values) :
                                           ''),
-                      (method === 'GET' ? getHeader( req ) :
-                       method === 'POST' ? postHeader( values, req ) :
-                       method === 'DELETE' ? deleteHeader( values, req ) : ''))
+                      (method === 'GET' ? getHeader( req, token ) :
+                       method === 'POST' ? postHeader( values, req, token ) :
+                       method === 'DELETE' ? deleteHeader( values, req, token ) : ''))
                .then(res => {
                  if ( !res.ok ) {
                    res.json().then((json) => {

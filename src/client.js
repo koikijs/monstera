@@ -12,7 +12,7 @@ import {Provider} from 'react-redux';
 import { ReduxAsyncConnect } from 'redux-async-connect';
 import getRoutes from './routes';
 
-const client = new ApiClient();
+const client = new ApiClient(null, window.__token );
 const history = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
 const store = createStore(history, client, window.__data);

@@ -1,6 +1,6 @@
 {
   "javascript": {
-    "main": "http://localhost:3001/dist/main-ce9cbd6cfe4b057dcfa6.js"
+    "main": "http://localhost:3001/dist/main-95248eb00c53770ee790.js"
   },
   "styles": {},
   "assets": {
@@ -22,11 +22,14 @@
       "search": "search___2HZ-p",
       "text": "text___1FNom",
       "card": "card___2VlDZ",
+      "suggest": "suggest___3kx55",
+      "item": "item___2Xo82",
+      "selected": "selected___21skp",
       "primary": "primary___18Hiv",
       "icon": "icon___K6gyE",
       "name": "name___2VQbX",
       "secondary": "secondary___iUBvy",
-      "_style": ".search___2HZ-p {\n  text-align: center;\n  border: 3px solid;\n  border-radius: 10px;\n}\n.text___1FNom {\n  width: 80%;\n  font-size: 0.8em;\n  border: none;\n  outline-style: none;\n}\n.card___2VlDZ {\n  border: 5px solid #112211;\n  border-radius: 10px;\n  font-size: 0.3em;\n  width: 220px;\n  height: 110px;\n  float: left;\n  margin: 10px;\n  padding: 10px;\n  padding-top: 20px;\n  padding-bottom: 20px;\n}\n.primary___18Hiv {\n  line-height: 50px;\n  margin-top: 10px;\n}\n.primary___18Hiv .icon___K6gyE {\n  width: 50px;\n  height: 50px;\n  margin-top: -10px;\n  border-radius: 50%;\n  vertical-align: text-top;\n  margin-right: 10px;\n}\n.primary___18Hiv .name___2VQbX {\n  line-height: 50px;\n}\n.secondary___iUBvy {\n  text-align: right;\n  font-size: 0.6em;\n  word-wrap: break-word;\n}\n"
+      "_style": ".search___2HZ-p {\n  text-align: center;\n  border: 3px solid;\n  border-radius: 10px;\n}\n.text___1FNom {\n  width: 80%;\n  font-size: 0.8em;\n  border: none;\n  outline-style: none;\n}\n.card___2VlDZ {\n  border: 5px solid #112211;\n  border-radius: 10px;\n  font-size: 0.3em;\n  width: 220px;\n  height: 110px;\n  float: left;\n  margin: 10px;\n  padding: 10px;\n  padding-top: 20px;\n  padding-bottom: 20px;\n}\n.suggest___3kx55 {\n  font-size: 0.3em;\n  border: 1px solid #112211;\n  list-style: none;\n  padding-left: 0;\n  margin-top: 0;\n  border-radius: 10px;\n  overflow: hidden;\n  position: absolute;\n  width: 100%;\n  background-color: #FFFFFF;\n  z-index: 1;\n}\n.item___2Xo82 {\n  display: block;\n}\n.selected___21skp {\n  background-color: #DDDDDD;\n}\n.primary___18Hiv {\n  line-height: 50px;\n  margin-top: 10px;\n}\n.icon___K6gyE {\n  width: 50px;\n  height: 50px;\n  margin-top: -10px;\n  border-radius: 50%;\n  vertical-align: text-top;\n  margin-right: 10px;\n}\n.name___2VQbX {\n  line-height: 50px;\n}\n.secondary___iUBvy {\n  text-align: right;\n  font-size: 0.6em;\n  word-wrap: break-word;\n}\n"
     }
   }
 }

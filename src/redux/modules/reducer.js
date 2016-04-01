@@ -5,6 +5,8 @@ import {reducer as reduxAsyncConnect} from 'redux-async-connect';
 import {reducer as form} from 'redux-form';
 import register from './register';
 import suggest from './suggest';
+import member from './member';
+
 import logger from './logger';
 
 export default combineReducers({
@@ -13,5 +15,6 @@ export default combineReducers({
   form,
   register,
   suggest,
-  logger
+  member,
+  logger,
 });
