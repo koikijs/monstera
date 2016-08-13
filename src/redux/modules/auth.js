@@ -1,4 +1,5 @@
 import uris from '../../uris';
+import config from '../../config';
 
 const LOAD = 'auth/LOAD';
 const LOAD_SUCCESS = 'auth/LOAD_SUCCESS';
@@ -36,6 +37,6 @@ export function load() {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: client =>
       client
-        .fetchJSON('http://localhost:3000' + uris.apis.auth, 'GET')
+        .fetchJSON(config.protocol + '://' + config.host + ':' + config.port + uris.apis.auth, 'GET')
   };
 }

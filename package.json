@@ -33,7 +33,10 @@
       "command": "node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "HOST": "monstera.herokuapp.com",
+        "PORT": "443",
+        "PROTOCOL": "https"
       }
     },
     "start-dev": {
@@ -42,7 +45,8 @@
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "HOST": "localhost",
-        "PORT": "3000"
+        "PORT": "3000",
+        "PROTOCOL": "http"
       }
     },
     "watch-client": {
