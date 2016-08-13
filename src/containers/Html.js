@@ -36,7 +36,7 @@ export default class Html extends Component {
           {head.script.toComponent()}
           <link rel="shortcut icon" href="/images/favicon.png" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-          <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css" />
+          <link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet" type="text/css" />
           <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet" type="text/css" />
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
           {/* styles (will be present only in production with webpack extract text plugin) */}

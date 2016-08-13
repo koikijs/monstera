@@ -1,0 +1,35 @@
+@import "variables.less";
+
+
+.buttons{
+  position: relative;
+  margin-top: 100px;
+  clear: both;
+
+  a{
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    color: @base-color-text;
+    background-color: @base-color-back;
+    border: 5px solid @base-color-text;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 90px;
+  }
+
+  a:hover{
+    color: @base-color-back;
+    background-color: @base-color-text;
+    transition: background-color 0.15s, color 0.15s;
+  }
+}
+
+.prev{
+  left: 0;
+}
+.next{
+  right: 0;
+}

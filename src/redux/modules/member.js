@@ -1,16 +1,27 @@
-
+import __ from 'lodash';
 const ADD = 'member/ADD';
+const ADD_SUCCESS = 'member/ADD_SUCCESS';
+const ADD_FAIL = 'member/ADD_FAIL';
 
 const initialState = {
   data: []
 };
 
-export default function member(state = initialState, action = {}) {
+export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case ADD:
       return {
+        ...state
+      };
+    case ADD_SUCCESS:
+      return {
         ...state,
-        data: state.data.concat([action.member])
+        data: __.find(state.data, { name: action.result.name }) ? state.data
+                                                                : state.data.concat([action.result])
+      };
+    case ADD_FAIL:
+      return {
+        ...state
       };
     default:
       return state;
@@ -19,7 +30,8 @@ export default function member(state = initialState, action = {}) {
 
 export function add(_member) {
   return {
-    type: ADD,
-    member: _member
+    types: [ ADD, ADD_SUCCESS, ADD_FAIL ],
+    promise: client =>
+      client.fetchJSON('http://chaus.herokuapp.com/apis/monstera/users/' + encodeURIComponent(_member), 'GET')
   };
 }

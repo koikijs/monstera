@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {ControlButton} from '../components';
 import {reduxForm} from 'redux-form';
+import uris from '../uris';
 import * as suggestActions from 'redux/modules/suggest';
 import * as memberActions from 'redux/modules/member';
 
@@ -14,11 +15,16 @@ const validate = values => {
 };
 
 @connect(
-  state => ({
+  (state, props) => ({
     routing: state.routing,
     suggests: state.suggest.data,
+    members: state.member.data,
     index: state.suggest.index,
-    selected: state.suggest.selected
+    selected: state.suggest.selected,
+    initialValues: {
+      query: state.suggest.query
+    },
+    event: props.params.event
   }),
   {
     ...suggestActions,
@@ -36,34 +42,37 @@ export default class RegisterMember extends Component {
     load: PropTypes.func.isRequired,
     suggests: PropTypes.array,
     index: PropTypes.number,
+    params: PropTypes.object.isRequired,
     selected: PropTypes.string,
+    members: PropTypes.array,
     prev: PropTypes.func.isRequired,
     next: PropTypes.func.isRequired,
     set: PropTypes.func.isRequired,
     add: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    clear: PropTypes.func.isRequired
   };
   render() {
     const {
       fields: {
         query
       },
-      handleSubmit,
+      clear,
       suggests,
+      members,
       index,
       prev,
       next,
       set,
+      event,
       selected,
       add,
       load
     } = this.props;
 
-    const styles = require('../css/member.less');
+    const styles = require('../css/register-member.less');
     return (
-      <form onSubmit={handleSubmit(()=>{
-      })}>
-        <div className={styles.search} >&quot;
+      <form>
+        <div className={styles.search + ' ' + (suggests.length ? styles.matched : '')} >&quot;
           <input
             className={styles.text}
             type="text"
@@ -85,8 +94,12 @@ export default class RegisterMember extends Component {
                 }
                 console.log(selected);
                 if (evt.key === 'Enter' && selected) {
-                  add(selected);
                   evt.preventDefault();
+                  add(selected).then(
+                    ()=>{
+                      clear();
+                    }
+                  );
                 }
               }
             }
@@ -102,50 +115,36 @@ export default class RegisterMember extends Component {
                      set(_index);
                    }
                  }
-                 >
+                 onClick={
+                   (evt)=>{
+                     evt.preventDefault();
+                     add(selected).then(
+                       ()=>{
+                         clear();
+                       }
+                     );
+                   }
+                 }>
                <img className={styles.icon} src={suggest.icon} />
                <span className={styles.name}>{suggest.name}</span>
              </li>
           )}
           </ul> : ''
         }
-        <div className={styles.card}>
-          <div className={styles.primary}>
-            <img src="https://avatars.githubusercontent.com/u/411486?v=3" className={styles.icon} />
-            <span className={styles.name} >sideroad</span>
-          </div>
-          <div className={styles.secondary}>
-            sideroad.jp@gmail.com
-          </div>
-        </div>
-        <div className={styles.card}>
-          <div className={styles.primary}>
-            <img src="https://avatars.githubusercontent.com/u/411486?v=3" className={styles.icon} />
-            <span className={styles.name} >sideroad</span>
-          </div>
-          <div className={styles.secondary}>
-            sideroad.jp@gmail.com
-          </div>
-        </div>
-        <div className={styles.card}>
-          <div className={styles.primary}>
-            <img src="https://avatars.githubusercontent.com/u/411486?v=3" className={styles.icon} />
-            <span className={styles.name} >sideroad</span>
-          </div>
-          <div className={styles.secondary}>
-            sideroad.jp@gmail.com
-          </div>
-        </div>
-        <div className={styles.card}>
-          <div className={styles.primary}>
-            <img src="https://avatars.githubusercontent.com/u/411486?v=3" className={styles.icon} />
-            <span className={styles.name} >sideroad</span>
-          </div>
-          <div className={styles.secondary}>
-            sideroad.jp@gmail.com
-          </div>
-        </div>
-        <ControlButton prev={'/register/name'} next={name.error ? '' : ''} />
+        {
+          members.map(member =>
+            <div className={styles.card} key={member.name}>
+              <div className={styles.primary}>
+                <img src={member.icon} className={styles.icon} />
+                <span className={styles.name} >{member.name}</span>
+              </div>
+              <div className={styles.secondary}>
+                {member.email}
+              </div>
+            </div>
+          )
+        }
+        <ControlButton prev={uris.register.name} next={members.length ? uris.normalize( uris.register.duration, {event} ) : ''} />
       </form>
     );
   }

@@ -1,6 +1,9 @@
 export App from './App';
+export Login from './Login';
 export Register from './Register';
 export RegisterName from './RegisterName';
-export RegisterDate from './RegisterDate';
+export RegisterDuration from './RegisterDuration';
 export RegisterMember from './RegisterMember';
+export Event from './Event';
+
 export NotFound from './NotFound';

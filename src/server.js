@@ -10,51 +10,50 @@ import ApiClient from './helpers/ApiClient';
 import Html from './containers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
-import session from 'express-session';
-import auth from './auth';
 
 import { match } from 'react-router';
-import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
+import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import expressSession from 'express-session';
+import passporter from 'helpers/passporter';
+import bff from 'helpers/bff';
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
 
+passporter.setup();
+
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'images', 'favicon.png')));
 
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+
 app.use(Express.static(path.join(__dirname, '..', 'static')));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+passporter.use(app);
+bff(app);
 
-app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
-
-auth(app);
-
-app.use((req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/auth/github');
-}, (req, res) => {
+app.use((req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
-  const token = req.user && req.user.token ? req.user.token : '';
-  const client = new ApiClient(req, token);
+  const client = new ApiClient(req);
   const history = createHistory(req.originalUrl);
 
   const store = createStore(history, client);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} token={token} />));
+      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />));
   }
 
   if (__DISABLE_SSR__) {
@@ -82,7 +81,7 @@ app.use((req, res, next) => {
         global.navigator = {userAgent: req.headers['user-agent']};
 
         res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} token={token} />));
+          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />));
       });
     } else {
       res.status(404).send('Not found');

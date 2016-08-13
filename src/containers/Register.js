@@ -7,10 +7,10 @@ export default class Register extends Component {
   };
 
   render() {
-    const styles = require('../css/customize.less');
+    const styles = require('../css/register.less');
     return (
       <div className={styles.register}>
-        <div className={styles.createEvent}>
+        <div className={styles.create}>
           {this.props.children}
         </div>
       </div>

@@ -1,6 +1,5 @@
 import __ from 'lodash';
 import {} from 'isomorphic-fetch';
-import config from '../config';
 
 const string = values => {
   return __.map(values, (value, key) =>
@@ -8,15 +7,11 @@ const string = values => {
   ).join('&');
 };
 
-const getHeader = (req, token) => {
+const getHeader = (req) => {
   const headers = {};
 
   if (req) {
     headers.cookie = req.get('cookie');
-  }
-
-  if (token) {
-    headers.Authorization = 'token ' + token;
   }
 
   return {
@@ -25,17 +20,13 @@ const getHeader = (req, token) => {
   };
 };
 
-const postHeader = (values, req, token) => {
+const postHeader = (values, req) => {
   const headers = {
     'Content-Type': 'application/json'
   };
 
   if (req) {
     headers.cookie = req.get('cookie');
-  }
-
-  if (token) {
-    headers.Authorization = 'token ' + token;
   }
 
   return {
@@ -46,17 +37,13 @@ const postHeader = (values, req, token) => {
 };
 
 
-const deleteHeader = (values, req, token) => {
+const deleteHeader = (values, req) => {
   const headers = {
     'Content-Type': 'application/json'
   };
 
   if (req) {
     headers.cookie = req.get('cookie');
-  }
-
-  if (token) {
-    headers.Authorization = 'token ' + token;
   }
 
   return {
@@ -67,24 +54,20 @@ const deleteHeader = (values, req, token) => {
 };
 
 export default class ApiClient {
-  constructor(req, token) {
+  constructor(req) {
     this.fetchJSON = ( path = '/', method = 'GET', values = {} ) => {
       console.log('## fetch ', path, method, values);
 
-      const base = __SERVER__ ? 'http://' + config.host + ':' + config.port
-                              : '';
-
       return new Promise((resolve, reject) => {
-        fetch( base + path +
-                      (method === 'GET' ? '?' + string(values) :
+        fetch( path + (method === 'GET' ? '?' + string(values) :
                                           ''),
-                      (method === 'GET' ? getHeader( req, token ) :
-                       method === 'POST' ? postHeader( values, req, token ) :
-                       method === 'DELETE' ? deleteHeader( values, req, token ) : ''))
+                      (method === 'GET' ? getHeader( req ) :
+                       method === 'POST' ? postHeader( values, req ) :
+                       method === 'DELETE' ? deleteHeader( values, req ) : ''))
                .then(res => {
                  if ( !res.ok ) {
                    res.json().then((json) => {
-                     console.log(json);
+                     console.log('reject', json);
                      reject(json);
                    });
                  } else if ( method === 'GET' ) {
@@ -93,6 +76,11 @@ export default class ApiClient {
                      resolve(json);
                    });
                  } else {
+                   console.log(res, res.headers, res.headers.get('Location'), res.headers.get('location'), res.headers.keys());
+                   // Display the keys
+                   for (const key of res.headers.keys()) {
+                     console.log(key);
+                   }
                    resolve({});
                  }
                });

@@ -16,10 +16,10 @@ export default class Body extends Component {
       assets,
       token
     } = this.props;
-    // const styles = require('../css/customize.less');
+    const styles = require('../css/customize.less');
     return (
-      <body>
-        <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
+      <body className={styles.body}>
+        <div id="content" dangerouslySetInnerHTML={{__html: content}} className={styles.content} />
         <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} charSet="UTF-8"/>
         <script dangerouslySetInnerHTML={{__html: `window.__token=${serialize(token)};`}} charSet="UTF-8"/>
         <script src={assets.javascript.main} charSet="UTF-8"/>
