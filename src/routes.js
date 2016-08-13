@@ -1,26 +1,25 @@
 import React from 'react';
-import {Route, IndexRedirect} from 'react-router';
+import {Route} from 'react-router';
+import uris from './uris';
+import required from 'helpers/required';
+import {load, isLoaded} from 'redux/modules/auth';
+
 import {
-    Register,
-    RegisterName,
-    RegisterDate,
-    RegisterMember,
+    App,
+    Event,
     NotFound,
   } from 'containers';
 
-export default () => {
+export default store => {
+  const login = required(store, load, isLoaded).login;
+
   /**
    * Please keep routes in alphabetical order
    */
   return (
     <Route>
-      <Route path="/">
-        <IndexRedirect to="/register/name" />
-        <Route path="/register/" component={Register} >
-          <Route path="name" component={RegisterName} />
-          <Route path="date" component={RegisterDate} />
-          <Route path="member" component={RegisterMember} />
-        </Route>
+      <Route path="/" component={App} >
+        <Route path={uris.events.event} component={Event} onEnter={login} />
         { /* Catch all route */ }
       </Route>
       <Route path="*" component={NotFound} status={404} />

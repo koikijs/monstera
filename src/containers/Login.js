@@ -3,15 +3,13 @@ import {connect} from 'react-redux';
 import {ControlButton} from '../components';
 import {reduxForm} from 'redux-form';
 import {push} from 'react-router-redux';
+import {login} from '../redux/modules/auth';
 import uris from '../uris';
 
 const validate = values => {
   const errors = {};
   if (!values.name) {
     errors.name = 'Required';
-  } else if ( values.name.length < 5 ||
-              values.name.length > 15) {
-    errors.name = 'Must be between 5 and 15 characters';
   }
   return errors;
 };
@@ -19,18 +17,20 @@ const validate = values => {
 @connect(
   () => ({}),
   {
-    push: push
+    push,
+    login
   }
 )
 @reduxForm({
-  form: 'eventName',
+  form: 'login',
   fields: ['name'],
   validate
 })
-export default class RegisterName extends Component {
+export default class Login extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
     push: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired
   };
   render() {
@@ -41,18 +41,20 @@ export default class RegisterName extends Component {
       handleSubmit
     } = this.props;
 
-    const submit = () => this.props.push( uris.normalize( uris.register.member, {event: name.value}));
+    const submit = () => {
+      this.props.login(name.value);
+      this.props.push( uris.register.name );
+    };
 
-    const styles = require('../css/register-name.less');
+    const styles = require('../css/login.less');
     return (
       <form onSubmit={handleSubmit(()=>{
         if ( ! name.error ) {
           submit();
         }
       })}>
-        <div className={styles.left} >I will hold</div>
+        <div className={styles.left} >My name is</div>
         <div className={styles.board} >&quot;<input className={styles.textbox} type="text" {...name} autoComplete="off" />&quot;</div>
-        <div className={styles.right} >Event.</div>
         <ControlButton prev={''} submit={
           !name.error ? ()=> submit() : undefined
         } />

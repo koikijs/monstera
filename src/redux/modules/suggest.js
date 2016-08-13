@@ -1,3 +1,6 @@
+import uris from '../../uris';
+
+const CLEAR = 'suggest/CLEAR';
 
 const LOAD = 'suggest/LOAD';
 const LOAD_SUCCESS = 'suggest/LOAD_SUCCESS';
@@ -7,9 +10,7 @@ const SELECT_PREV = 'suggest/SELECT_PREV';
 const SELECT_NEXT = 'suggest/SELECT_NEXT';
 const SELECT_INDEX = 'suggest/SELECT_INDEX';
 
-const cache = {
-  '': []
-};
+const cache = {};
 
 const initialState = {
   data: [],
@@ -19,13 +20,19 @@ const initialState = {
   selected: undefined
 };
 
-export default function suggest(state = initialState, action = {}) {
+export default function reducer(state = initialState, action = {}) {
   let index;
-  console.log(state);
   switch (action.type) {
+    case CLEAR:
+      return {
+        ...state,
+        query: '',
+        data: []
+      };
     case LOAD:
       return {
         ...state,
+        query: action.query,
         loading: true,
         loaded: false,
         saveSuccess: false
@@ -78,22 +85,31 @@ export default function suggest(state = initialState, action = {}) {
 
 export function load(query) {
   return {
+    query,
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => cache[query] ? new Promise(resolve=>resolve(cache[query])) : client.fetchJSON('https://api.github.com/search/users', 'GET', {
-      q: query,
-      page: 1,
-      per_page: 5
-    }).then((res) => {
-      res.items = res.items.map(item => {
-        const member = {
-          name: item.login,
-          icon: item.avatar_url + '&s=100'
-        };
-        return member;
-      });
-      cache[query] = res;
-      return res;
-    })
+    promise: (client) =>
+      cache[query] ?
+        new Promise(resolve=>resolve(cache[query])) :
+        client.fetchJSON('https://chaus.herokuapp.com' + uris.apis.users, 'GET', {
+          name: '*' + query + '*',
+          limit: 5
+        }).then((res) => {
+          res.items = res.items.map(item => {
+            const member = {
+              name: item.name,
+              icon: item.icon + '&s=100'
+            };
+            return member;
+          });
+          cache[query] = res;
+          return res;
+        })
+  };
+}
+
+export function clear() {
+  return {
+    type: CLEAR
   };
 }
 

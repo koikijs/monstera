@@ -6,3 +6,5 @@
  */
 
 export ControlButton from './ControlButton';
+export Candidate from './Candidate';
+export Calendar from './Calendar';

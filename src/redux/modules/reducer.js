@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import { routeReducer } from 'react-router-redux';
-import {reducer as reduxAsyncConnect} from 'redux-async-connect';
+import {reducer as reduxAsyncConnect} from 'redux-connect';
 
 import {reducer as form} from 'redux-form';
 import register from './register';
 import suggest from './suggest';
 import member from './member';
+import auth from './auth';
+import candidate from './candidate';
 
 import logger from './logger';
 
@@ -14,7 +16,9 @@ export default combineReducers({
   reduxAsyncConnect,
   form,
   register,
+  auth,
   suggest,
   member,
+  candidate,
   logger,
 });
