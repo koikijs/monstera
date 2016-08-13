@@ -34,9 +34,8 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "HOST": "monstera.herokuapp.com",
-        "PORT": "443",
-        "PROTOCOL": "https"
+        "MONSTERA_HOST": "monstera.herokuapp.com",
+        "MONSTERA_PROTOCOL": "https"
       }
     },
     "start-dev": {
@@ -46,7 +45,9 @@
         "NODE_ENV": "development",
         "HOST": "localhost",
         "PORT": "3000",
-        "PROTOCOL": "http"
+        "MONSTERA_HOST": "localhost",
+        "MONSTERA_PORT": "3000",
+        "MONSTERA_PROTOCOL": "http"
       }
     },
     "watch-client": {
