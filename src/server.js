@@ -28,7 +28,7 @@ const server = new http.Server(app);
 passporter.setup();
 
 app.use(compression());
-app.use(favicon(path.join(__dirname, '..', 'static', 'images', 'favicon.png')));
+app.use(favicon(path.join(__dirname, 'images', 'favicon.png')));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
