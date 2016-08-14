@@ -57,11 +57,20 @@
   }
 }
 
+.item:hover .close {
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: 0.3s;
+}
 .close {
   color: @3rd-color-text;
   float: right;
+  opacity: 0.5;
   margin-right: 15%;
+  transition-property: opacity;
+  transition-duration: 0.3s;
 }
+
 .empty {
   position: absolute;
   top: 50%;

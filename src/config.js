@@ -16,9 +16,10 @@ module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT || 3000,
   global: {
-    host: process.env.MONSTERA_HOST || process.env.URL,
+    host: process.env.MONSTERA_HOST,
     port: process.env.MONSTERA_PORT,
-    protocol: process.env.MONSTERA_PROTOCOL || 'http'
+    protocol: process.env.MONSTERA_PROTOCOL,
+    url: process.env.MONSTERA_PROTOCOL + '://' + process.env.MONSTERA_HOST + (process.env.MONSTERA_PORT ? ':' + process.env.MONSTERA_PORT : '' )
   },
   monglURL: '', // If you want to set MongoURL on config, please set here otherwise, process.env.APIKIT_MONGO_URL will be used.
   app: {

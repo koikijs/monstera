@@ -6,6 +6,7 @@ export default class Calendar extends Component {
 
   static propTypes = {
     date: PropTypes.object,
+    holidays: PropTypes.array,
     selected: PropTypes.array,
     onSelect: PropTypes.func
   };
@@ -64,10 +65,10 @@ export default class Calendar extends Component {
       className
     } = this.state;
     const {
-      selected
+      selected,
+      holidays
     } = this.props;
     const start = moment.utc(date).startOf('month').startOf('week');
-
     return (
       <div className={styles.calendar}>
         <div className={styles.control + ' ' + styles.clearfix}>
@@ -101,10 +102,15 @@ export default class Calendar extends Component {
                 <tr key={week}>
                   {__.times(7, weekday => {
                     const _date = moment.utc(start).add( (week * 7) + weekday, 'days');
+                    const dateClassName = [
+                                            (__.some(selected || [], item => _date.isSame(moment.utc(item).startOf('date'))) ? styles.selected : '' ),
+                                            (_date.isSame(today) ? styles.today :
+                                             __.some(holidays || [], item => _date.isSame(moment.utc(item).startOf('date'))) ? styles.holiday :
+                                            !_date.isSame(date, 'month') ? styles.other : ''),
+                                            (styles[_date.format('ddd').toLowerCase()])
+                    ].join(' ');
                     return (<td key={weekday} className={styles.col}>
-                              <div className={__.some(selected || [], item => _date.isSame(moment.utc(item).startOf('date'))) ? styles.selected :
-                                              _date.isSame(today) ? styles.today :
-                                              _date.isSame(date, 'month') ? styles.notselected : styles.disabled}>
+                              <div className={dateClassName}>
                                 <div className={styles.date}>
                                   <a className={styles.link} href="" onClick={evt => this.select(evt, _date)}>
                                     <div className={styles.linkcircle}></div>

@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import {load, select as selectCandidate, unselect as unselectCandidate} from 'redux/modules/candidate';
+import {load as loadCandidate, select as selectCandidate, unselect as unselectCandidate} from 'redux/modules/candidate';
+import {load as loadHoliday} from 'redux/modules/holiday';
+
 import moment from 'moment';
 import __ from 'lodash';
 import {
@@ -11,15 +13,19 @@ import { asyncConnect } from 'redux-connect';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}, params}) => {
-    return dispatch(load({
+    const promises = [];
+    promises.push(dispatch(loadCandidate({
       event: params.event,
       user: getState().auth.data.name
-    }));
+    })));
+    promises.push(dispatch(loadHoliday()));
+    return Promise.all(promises);
   }
 }])
 @connect(
   (state, props) => ({
     candidate: state.candidate.items,
+    holiday: state.holiday.items,
     auth: state.auth.data,
     event: props.params.event
   }),
@@ -31,6 +37,7 @@ import { asyncConnect } from 'redux-connect';
 export default class Event extends Component {
   static propTypes = {
     candidate: PropTypes.array,
+    holiday: PropTypes.array,
     auth: PropTypes.object,
     params: PropTypes.object.isRequired,
     event: PropTypes.string.isRequired,
@@ -41,6 +48,7 @@ export default class Event extends Component {
     const styles = require('../css/event.less');
     const {
       candidate,
+      holiday,
       auth,
       event,
       select,
@@ -65,6 +73,7 @@ export default class Event extends Component {
           }
         />
         <Calendar
+          holidays={holiday}
           selected={selected}
           onSelect={
             date => {

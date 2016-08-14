@@ -18,7 +18,7 @@ export default {
     passport.use(new Strategy({
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: config.global.protocol + '://' + config.global.host + (config.global.port ? ':' + config.global.port : '' ) + '/auth/github/callback'
+      callbackURL: config.global.url + '/auth/github/callback'
     }, (accessToken, refreshToken, profile, cb) => {
       return cb(null, profile);
     }));

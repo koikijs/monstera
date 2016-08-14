@@ -37,6 +37,6 @@ export function load() {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: client =>
       client
-        .fetchJSON(config.global.protocol + '://' + config.global.host + (config.global.port ? ':' + config.global.port : '' ) + uris.apis.auth, 'GET')
+        .fetchJSON(config.global.url + uris.apis.auth, 'GET')
   };
 }

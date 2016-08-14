@@ -8,6 +8,7 @@ import suggest from './suggest';
 import member from './member';
 import auth from './auth';
 import candidate from './candidate';
+import holiday from './holiday';
 
 import logger from './logger';
 
@@ -20,5 +21,6 @@ export default combineReducers({
   suggest,
   member,
   candidate,
+  holiday,
   logger,
 });
