@@ -32,6 +32,6 @@ export function add(_member) {
   return {
     types: [ ADD, ADD_SUCCESS, ADD_FAIL ],
     promise: client =>
-      client.fetchJSON('http://chaus.herokuapp.com/apis/monstera/users/' + encodeURIComponent(_member), 'GET')
+      client.fetchJSON('https://chaus.herokuapp.com/apis/monstera/users/' + encodeURIComponent(_member), 'GET')
   };
 }

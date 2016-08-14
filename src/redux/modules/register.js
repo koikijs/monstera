@@ -47,12 +47,12 @@ export function save( values ) {
     types: [ SAVE, SAVE_SUCCESS, SAVE_FAIL ],
     promise: client =>
       client
-        .fetchJSON('http://chaus.herokuapp.com' + uris.apis.events, 'POST', {
+        .fetchJSON('https://chaus.herokuapp.com' + uris.apis.events, 'POST', {
           name: values.event
         })
         .then(()=>
           client
-            .fetchJSON('http://chaus.herokuapp.com' + uris.apis.events, 'GET', {
+            .fetchJSON('https://chaus.herokuapp.com' + uris.apis.events, 'GET', {
               name: values.event
             })
             .then((res)=>
@@ -62,7 +62,7 @@ export function save( values ) {
         .then((event)=>{
           const promises = values.members.map((member)=>
             client
-              .fetchJSON('http://chaus.herokuapp.com' + uris.apis.attendees, 'POST', {
+              .fetchJSON('https://chaus.herokuapp.com' + uris.apis.attendees, 'POST', {
                 event: event.id,
                 user: member.id
               })
