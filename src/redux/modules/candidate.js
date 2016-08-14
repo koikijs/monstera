@@ -52,7 +52,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         items: state.items.filter(
-          item => moment(item.date).isSame(moment(action.query.date), 'date') ? false : true
+          item => moment.utc(item.date).isSame(moment.utc(action.query.date), 'date') ? false : true
         )
       };
     case UNSELECT_SUCCESS:

@@ -60,7 +60,7 @@ export default class Event extends Component {
               unselect({
                 user: auth.name,
                 event,
-                date: moment(date).format()
+                date: moment.utc(date).format()
               })
           }
         />
@@ -68,17 +68,17 @@ export default class Event extends Component {
           selected={selected}
           onSelect={
             date => {
-              if ( __.some(selected, item => moment(item).startOf('date').isSame(date)) ) {
+              if ( __.some(selected, item => moment.utc(item).startOf('date').isSame(date)) ) {
                 unselect({
                   user: auth.name,
                   event,
-                  date: moment(date).format()
+                  date: moment.utc(date).format()
                 });
               } else {
                 select({
                   user: auth.name,
                   event,
-                  date: moment(date).format()
+                  date: moment.utc(date).format()
                 });
               }
             }

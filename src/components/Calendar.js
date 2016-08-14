@@ -17,8 +17,8 @@ export default class Calendar extends Component {
 
   componentWillMount() {
     this.setState({
-      date: (this.props.date ? moment(this.props.date) : moment()).startOf('date'),
-      today: moment().startOf('date'),
+      date: (this.props.date ? moment.utc(this.props.date) : moment.utc()).startOf('date'),
+      today: moment.utc().startOf('date'),
       className: ''
     });
   }
@@ -27,7 +27,7 @@ export default class Calendar extends Component {
     evt.preventDefault();
     const that = this;
     this.setState({
-      date: moment(this.state.date).add(1, 'months'),
+      date: moment.utc(this.state.date).add(1, 'months'),
       className: 'nextMonth'
     });
     setTimeout( ()=> that.setState({className: ''}), 250);
@@ -37,7 +37,7 @@ export default class Calendar extends Component {
     evt.preventDefault();
     const that = this;
     this.setState({
-      date: moment(this.state.date).subtract(1, 'months'),
+      date: moment.utc(this.state.date).subtract(1, 'months'),
       className: 'prevMonth'
     });
     setTimeout( ()=> that.setState({className: ''}), 250);
@@ -66,7 +66,7 @@ export default class Calendar extends Component {
     const {
       selected
     } = this.props;
-    const start = moment(date).startOf('month').startOf('week');
+    const start = moment.utc(date).startOf('month').startOf('week');
 
     return (
       <div className={styles.calendar}>
@@ -100,9 +100,9 @@ export default class Calendar extends Component {
               __.times(5, week =>
                 <tr key={week}>
                   {__.times(7, weekday => {
-                    const _date = moment(start).add( (week * 7) + weekday, 'days');
+                    const _date = moment.utc(start).add( (week * 7) + weekday, 'days');
                     return (<td key={weekday} className={styles.col}>
-                              <div className={__.some(selected || [], item => _date.isSame(moment(item).startOf('date'))) ? styles.selected :
+                              <div className={__.some(selected || [], item => _date.isSame(moment.utc(item).startOf('date'))) ? styles.selected :
                                               _date.isSame(today) ? styles.today :
                                               _date.isSame(date, 'month') ? styles.notselected : styles.disabled}>
                                 <div className={styles.date}>

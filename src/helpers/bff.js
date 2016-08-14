@@ -4,7 +4,7 @@ import __ from 'lodash';
 
 export default app => {
 
-  app.get('/apis/:event/next', (req, res) => {
+  app.get('/api/:event/next', (req, res) => {
     const client = new ApiClient(req);
 
     client

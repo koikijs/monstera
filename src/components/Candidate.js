@@ -8,12 +8,6 @@ export default class Candidate extends Component {
     onDelete: PropTypes.func.isRequired
   };
 
-  componentWillMount() {
-    this.setState({
-      selected: this.props.selected ? this.props.selected.map(item => moment(item).startOf('date')) : []
-    });
-  }
-
   focus(evt) {
     evt.preventDefault();
   }
@@ -31,7 +25,9 @@ export default class Candidate extends Component {
 
     return (
       <div className={styles.candidate + ' ' + styles.clearfix}>
-        <div className={styles.lead + ' ' + (!selected.length ? styles.emptyLead : '')}>I'll be available on</div>
+        <div className={styles.lead + ' ' + (!selected.length ? styles.emptyLead : '')}>
+          {!selected.length ? 'Select available days' : 'I\'ll be available on'}
+        </div>
         {
           !selected.length
           ? <div className={styles.empty}>
@@ -45,7 +41,7 @@ export default class Candidate extends Component {
                   selected.sort((itemA, itemB) => {
                     return itemA > itemB ? 1 : -1;
                   }).map(item => {
-                    const date = moment(item).startOf('date');
+                    const date = moment.utc(item).startOf('date');
                     return (
                       <li key={date.format('ll')} className={styles.item} >
                         <span className={styles.date} >{date.format('ll')}</span>
