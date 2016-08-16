@@ -73,7 +73,9 @@ export function load( query ) {
   return {
     types: [ LOAD, LOAD_SUCCESS, LOAD_FAIL ],
     promise: client =>
-      client.fetchJSON('https://chaus.herokuapp.com/apis/monstera/candidates', 'GET', query)
+      client.fetchJSON('https://chaus.herokuapp.com/apis/monstera/candidates', 'GET', Object.assign({
+        limit: 1000
+      }, query))
   };
 }
 
