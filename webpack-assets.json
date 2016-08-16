@@ -1,6 +1,6 @@
 {
   "javascript": {
-    "main": "http://localhost:3001/dist/main-2d25f7348cfe719c76d8.js"
+    "main": "http://localhost:3001/dist/main-7b073d9a7e797f72e604.js"
   },
   "styles": {},
   "assets": {
@@ -20,7 +20,7 @@
       "logotext": "logotext___d1BgC",
       "user": "user___SVmLc",
       "icon": "icon___10EaM",
-      "_style": ".app___3hg65 {\n  width: 100%;\n  height: 100%;\n}\n.header___2hp6N {\n  height: 10%;\n  line-height: 50px;\n  display: inline-block;\n  margin: 15px;\n}\n.logo___3VXGC {\n  width: 50px;\n  height: 50px;\n  display: inline-block;\n  vertical-align: middle;\n  margin-top: -20px;\n}\n.logotext___d1BgC {\n  margin-left: 15px;\n  font-size: 35px;\n}\n.user___SVmLc {\n  position: absolute;\n  top: 15px;\n  right: 15px;\n}\n.icon___10EaM {\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n}\n@media (max-width: 320px) {\n  .logo___3VXGC {\n    width: 40px;\n    height: 40px;\n  }\n  .icon___10EaM {\n    width: 40px;\n    height: 40px;\n  }\n  .logotext___d1BgC {\n    font-size: 30px;\n  }\n  .header___2hp6N {\n    margin: 5px 15px;\n  }\n}\n"
+      "_style": ".app___3hg65 {\n  width: 100%;\n  height: 100%;\n}\n.header___2hp6N {\n  height: 10%;\n  line-height: 50px;\n  display: inline-block;\n  margin: 15px;\n}\n.logo___3VXGC {\n  width: 50px;\n  height: 50px;\n  display: inline-block;\n  vertical-align: middle;\n  margin-top: -20px;\n}\n.logotext___d1BgC {\n  margin-left: 15px;\n  font-size: 35px;\n}\n.user___SVmLc {\n  position: absolute;\n  top: 15px;\n  right: 15px;\n}\n.icon___10EaM {\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n}\n@media (max-width: 320px) {\n  .logo___3VXGC {\n    width: 40px;\n    height: 40px;\n  }\n  .icon___10EaM {\n    width: 40px;\n    height: 40px;\n  }\n  .logotext___d1BgC {\n    font-size: 30px;\n  }\n  .header___2hp6N {\n    height: 55px;\n    margin: 5px 15px;\n  }\n}\n"
     },
     "./src/css/control-button.less": {
       "buttons": "buttons___1-Y3u",
