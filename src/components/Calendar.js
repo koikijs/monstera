@@ -27,6 +27,7 @@ export default class Calendar extends Component {
 
   nextMonth(evt) {
     evt.preventDefault();
+    evt.target.blur();
     const that = this;
     this.setState({
       date: moment.utc(this.state.date).add(1, 'months'),
@@ -37,6 +38,7 @@ export default class Calendar extends Component {
 
   prevMonth(evt) {
     evt.preventDefault();
+    evt.target.blur();
     const that = this;
     this.setState({
       date: moment.utc(this.state.date).subtract(1, 'months'),
@@ -47,6 +49,7 @@ export default class Calendar extends Component {
 
   select(evt, _date) {
     evt.preventDefault();
+    evt.target.blur();
     if ( _date.isAfter(this.state.date, 'month') ) {
       this.nextMonth(evt);
     }
