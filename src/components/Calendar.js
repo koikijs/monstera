@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 import __ from 'lodash';
+import Swipeable from 'react-swipeable';
 
 export default class Calendar extends Component {
 
@@ -78,7 +79,13 @@ export default class Calendar extends Component {
               <span><i className="fa fa-chevron-left" aria-hidden="true"></i></span>
             </a>
           </div>
-          <div className={styles.month + ' ' + styles[className]}>{date.format('MMMM') + ' ' + date.format('YYYY')}</div>
+          <Swipeable
+            onSwipedRight={::this.prevMonth}
+            onSwipedLeft={::this.nextMonth}>
+            <div className={styles.month + ' ' + styles[className]}>
+              {date.format('MMMM') + ' ' + date.format('YYYY')}
+            </div>
+          </Swipeable>
           <div className={styles.next}>
             <a className={styles.link} onClick={::this.nextMonth} href="" >
               <div className={styles.linkcircle}></div>
