@@ -59,7 +59,6 @@
   background-color: @base-color-text;
   transition-property: border-radius, opacity, transform;
   transition-duration: 0.3s;
-
 }
 
 .link span{
@@ -268,6 +267,18 @@
     height: 50px;
     margin-left: -25px;
     margin-top: -25px;
+  }
+
+  .link:hover .linkcircle{
+    opacity: 0;
+  }
+
+  .link:hover{
+    color: @base-color-text;
+  }
+
+  .selected .link:hover .linkcircle{
+    opacity: 0;
   }
 }
 
