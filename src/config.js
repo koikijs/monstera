@@ -1,7 +1,7 @@
 require('babel-polyfill');
 
 const title = 'Monstera';
-const description = 'Build RESTful API within 5 min';
+const description = 'Coordinate work with others';
 
 const environment = {
   development: {

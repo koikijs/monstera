@@ -1,8 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {load as loadCandidate, select as selectCandidate, unselect as unselectCandidate} from 'redux/modules/candidate';
 import {load as loadHoliday} from 'redux/modules/holiday';
-
+import Helmet from 'react-helmet';
 import moment from 'moment';
+import config from '../config';
 import __ from 'lodash';
 import {
   Candidate,
@@ -61,6 +62,7 @@ export default class Event extends Component {
 
     return (
       <div className={styles.event}>
+        <Helmet {...config.app.head} title={`Coordinate ${event} with others`} />
         <Candidate
           selected={selected}
           onDelete={
