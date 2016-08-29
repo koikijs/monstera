@@ -1,4 +1,5 @@
 import moment from 'moment';
+import uris from '../../uris';
 
 const LOAD = 'candidate/LOAD';
 const LOAD_SUCCESS = 'candidate/LOAD_SUCCESS';
@@ -73,7 +74,7 @@ export function load( query ) {
   return {
     types: [ LOAD, LOAD_SUCCESS, LOAD_FAIL ],
     promise: client =>
-      client.fetchJSON('https://chaus.herokuapp.com/apis/monstera/candidates', 'GET', Object.assign({
+      client.fetchJSON('https://chaus.herokuapp.com' + uris.apis.candidates, 'GET', Object.assign({
         limit: 1000
       }, query))
   };
@@ -85,7 +86,7 @@ export function select( query ) {
     types: [ SELECT, SELECT_SUCCESS, SELECT_FAIL ],
     promise: client =>
       client
-        .fetchJSON('https://chaus.herokuapp.com/apis/monstera/candidates', 'POST', query)
+        .fetchJSON('https://chaus.herokuapp.com' + uris.apis.candidates, 'POST', query)
         .then(
           () => load({
             event: query.event,
@@ -100,7 +101,7 @@ export function unselect( query ) {
     types: [ UNSELECT, UNSELECT_SUCCESS, UNSELECT_FAIL ],
     promise: client =>
       client
-        .fetchJSON('https://chaus.herokuapp.com/apis/monstera/candidates', 'DELETE', query)
+        .fetchJSON('https://chaus.herokuapp.com' + uris.apis.candidates, 'DELETE', query)
         .then(
           () => load({
             event: query.event,

@@ -1,6 +1,7 @@
 import ApiClient from '../helpers/ApiClient';
 import moment from 'moment';
 import __ from 'lodash';
+import uris from '../uris';
 
 export default app => {
 
@@ -8,11 +9,11 @@ export default app => {
     const client = new ApiClient(req);
 
     client
-      .fetchJSON('https://chaus.herokuapp.com/apis/monstera/attendees')
+      .fetchJSON('https://chaus.herokuapp.com' + uris.normalize(uris.apis.event, { id: req.params.event}))
       .then(
-        participants => {
+        event => {
           client
-            .fetchJSON('https://chaus.herokuapp.com/apis/monstera/candidates', 'GET', {
+            .fetchJSON('https://chaus.herokuapp.com' + uris.apis.candidates, 'GET', {
               event: req.params.event,
               date: '[' + moment().format() + ',' + moment('2999-12-31').format() + ']',
               limit: 10000
@@ -34,7 +35,7 @@ export default app => {
               res.json(
                 __(calc)
                   .chain()
-                  .filter(item => item.count === participants.items.length)
+                  .filter(item => item.count >= event.min)
                   .orderBy(['date'], ['asc'])
                   .value()[0] || {});
             });

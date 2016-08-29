@@ -12,9 +12,11 @@ export default {
   },
   apis: {
     auth: '/auth',
+    event: '/apis/monstera/events/:id',
     users: '/apis/monstera/users',
     events: '/apis/monstera/events',
-    attendees: '/apis/monstera/attendees'
+    attendees: '/apis/monstera/attendees',
+    candidates: '/apis/monstera/candidates'
   },
   login: {
     login: '/login'

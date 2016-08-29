@@ -69,20 +69,13 @@ export default class ApiClient {
                .then(res => {
                  if ( !res.ok ) {
                    res.json().then((json) => {
-                     console.log('reject', json);
                      reject(json);
                    });
                  } else if ( method === 'GET' ) {
                    res.json().then((json) => {
-                     console.log(json);
                      resolve(json);
                    });
                  } else {
-                   console.log(res, res.headers, res.headers.get('Location'), res.headers.get('location'), res.headers.keys());
-                   // Display the keys
-                   for (const key of res.headers.keys()) {
-                     console.log(key);
-                   }
                    resolve({});
                  }
                });
