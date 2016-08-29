@@ -35,7 +35,7 @@ export default class Candidate extends Component {
                 <i className="fa fa-arrow-right" />
               </div>
             </div>
-          : <div>
+          : <div className={styles.exists}>
               <ul className={styles.dates}>
                 {
                   selected.sort((itemA, itemB) => {
