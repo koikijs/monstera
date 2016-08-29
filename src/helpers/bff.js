@@ -8,7 +8,7 @@ export default app => {
     const client = new ApiClient(req);
 
     client
-      .fetchJSON('https://chaus.herokuapp.com/apis/monstera/participants')
+      .fetchJSON('https://chaus.herokuapp.com/apis/monstera/attendees')
       .then(
         participants => {
           client
