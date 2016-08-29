@@ -10,8 +10,8 @@ import {
     NotFound,
   } from 'containers';
 
-export default store => {
-  const login = required(store, load, isLoaded).login;
+export default (store, res) => {
+  const login = required(store, load, isLoaded, res).login;
 
   /**
    * Please keep routes in alphabetical order

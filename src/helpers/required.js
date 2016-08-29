@@ -1,6 +1,6 @@
 import cookie from 'react-cookie';
 
-export default (store, load, isLoaded) => {
+export default (store, load, isLoaded, res) => {
   return {
     login: (nextState, replace, cb) => {
       function checkAuth() {
@@ -16,7 +16,11 @@ export default (store, load, isLoaded) => {
         store.dispatch(load()).then(
           checkAuth,
           () => {
-            cookie.save('redirect', nextState.location.pathname);
+            if ( res ) {
+              res.cookie('redirect', nextState.location.pathname);
+            } else {
+              cookie.save('redirect', nextState.location.pathname);
+            }
             replace('/auth/github');
             cb();
           }
