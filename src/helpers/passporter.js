@@ -1,6 +1,5 @@
 import passport from 'passport';
 import { Strategy } from 'passport-github2';
-import cookie from 'react-cookie';
 import config from '../config';
 
 export default {
@@ -35,7 +34,7 @@ export default {
       passport.authenticate('github', { failureRedirect: '/auth/github' }),
       (req, res) => {
         // Successful authentication, redirect home.
-        const redirect = cookie.load('redirect');
+        const redirect = req.cookies.redirect;
         if ( redirect ) {
           res.redirect(redirect);
         } else {
