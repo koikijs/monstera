@@ -147,19 +147,19 @@ export default class Calendar extends Component {
                                               !_date.isSame(date, 'month') ? styles.other : ''),
                                               (styles[_date.format('ddd').toLowerCase()])
                       ].join(' ');
-                      return (<td key={weekday} className={styles.col}>
+                      return (<td key={_date.toDate().getTime()} className={styles.col}>
                                 <div className={dateClassName}>
                                   <div className={styles.date}>
                                     {
-                                      min && min.toDate() > _date.toDate() ?
-                                      <div className={styles.disabled} >
-                                        <span>{_date.date()}</span>
-                                      </div>
+                                      min && min.toDate().getTime() > _date.toDate().getTime() ?
+                                        <div className={styles.disabled} >
+                                          <span>{_date.date()}</span>
+                                        </div>
                                       :
-                                      <a className={styles.link} href="" onClick={evt => this.select(evt, _date)}>
-                                        <div className={styles.linkcircle}></div>
-                                        <span>{_date.date()}</span>
-                                      </a>
+                                        <a className={styles.link} href="" onClick={evt => this.select(evt, _date)}>
+                                          <div className={styles.linkcircle}></div>
+                                          <span>{_date.date()}</span>
+                                        </a>
                                     }
                                   </div>
                                 </div>
