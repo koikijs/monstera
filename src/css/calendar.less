@@ -12,6 +12,15 @@
   margin-bottom: 20px;
 }
 
+.link,
+.disabled{
+  color: @base-color-text;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
 .sat .link,
 .sun .link,
 .holiday .link{
@@ -20,6 +29,10 @@
 
 .today .link{
   color: @base-color-dark;
+}
+
+.disabled {
+  opacity: 0.25;
 }
 
 .clearfix:after {
@@ -35,13 +48,6 @@
   max-width: 550px;
   margin: auto;
   height: 60px;
-}
-
-.link{
-  color: @base-color-text;
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 
 .linkcircle{
@@ -61,7 +67,8 @@
   transition-duration: 0.3s;
 }
 
-.link span{
+.link span,
+.disabled span{
   position: relative;
   top: 50%;
   transform: translate(-50%,-50%);
@@ -256,9 +263,6 @@
     opacity: 1;
   }
 }
-
-
-
 
 
 @media (max-width: 768px) {

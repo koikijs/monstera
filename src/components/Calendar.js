@@ -7,6 +7,7 @@ export default class Calendar extends Component {
 
   static propTypes = {
     date: PropTypes.object,
+    min: PropTypes.object,
     holidays: PropTypes.array,
     selected: PropTypes.array,
     onSelect: PropTypes.func
@@ -96,7 +97,8 @@ export default class Calendar extends Component {
     } = this.state;
     const {
       selected,
-      holidays
+      holidays,
+      min
     } = this.props;
     const start = moment.utc(date).startOf('month').startOf('week');
     return (
@@ -148,10 +150,17 @@ export default class Calendar extends Component {
                       return (<td key={weekday} className={styles.col}>
                                 <div className={dateClassName}>
                                   <div className={styles.date}>
-                                    <a className={styles.link} href="" onClick={evt => this.select(evt, _date)}>
-                                      <div className={styles.linkcircle}></div>
-                                      <span>{_date.date()}</span>
-                                    </a>
+                                    {
+                                      min && min.toDate() > _date.toDate() ?
+                                      <div className={styles.disabled} >
+                                        <span>{_date.date()}</span>
+                                      </div>
+                                      :
+                                      <a className={styles.link} href="" onClick={evt => this.select(evt, _date)}>
+                                        <div className={styles.linkcircle}></div>
+                                        <span>{_date.date()}</span>
+                                      </a>
+                                    }
                                   </div>
                                 </div>
                               </td>);

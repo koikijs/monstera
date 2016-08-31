@@ -75,6 +75,7 @@ export default class Event extends Component {
           }
         />
         <Calendar
+          min={moment.utc().startOf('date')}
           holidays={holiday}
           selected={selected}
           onSelect={
