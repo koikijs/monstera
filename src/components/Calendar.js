@@ -26,26 +26,24 @@ export default class Calendar extends Component {
     });
   }
 
-  nextMonth(evt) {
-    evt.preventDefault();
+  nextMonth(swiping) {
     const that = this;
-    evt.target.blur();
     this.setState({
       date: moment.utc(this.state.date).add(1, 'months'),
-      className: 'nextMonth'
+      className: 'nextMonth',
+      swiping
     });
-    setTimeout( ()=> that.setState({className: ''}), 250);
+    setTimeout( ()=> that.setState({className: '', swiping: false}), 250);
   }
 
-  prevMonth(evt) {
-    evt.preventDefault();
+  prevMonth(swiping) {
     const that = this;
-    evt.target.blur();
     this.setState({
       date: moment.utc(this.state.date).subtract(1, 'months'),
-      className: 'prevMonth'
+      className: 'prevMonth',
+      swiping
     });
-    setTimeout( ()=> that.setState({className: ''}), 250);
+    setTimeout( ()=> that.setState({className: '', swiping: false}), 250);
   }
 
   swiped() {
@@ -54,24 +52,16 @@ export default class Calendar extends Component {
     });
   }
 
-  swipingNext(evt) {
-    if (this.state.swiping) {
-      return;
+  swipingNext() {
+    if (!this.state.swiping) {
+      this.nextMonth(true);
     }
-    this.setState({
-      swiping: true
-    });
-    this.nextMonth(evt);
   }
 
-  swipingPrev(evt) {
-    if (this.state.swiping) {
-      return;
+  swipingPrev() {
+    if (!this.state.swiping) {
+      this.prevMonth(true);
     }
-    this.setState({
-      swiping: true
-    });
-    this.prevMonth(evt);
   }
 
   select(evt, _date) {
@@ -105,11 +95,15 @@ export default class Calendar extends Component {
       <div className={styles.calendar}>
         <Swipeable
           onSwipingRight={::this.swipingPrev}
-          onSwiped={::this.swiped}
-          onSwipingLeft={::this.swipingNext}>
+          onSwipedRight={::this.swiped}
+          onSwipingLeft={::this.swipingNext}
+          onSwipedLeft={::this.swiped}>
           <div className={styles.control + ' ' + styles.clearfix}>
             <div className={styles.prev}>
-              <a className={styles.link} onClick={::this.prevMonth} href="" >
+              <a className={styles.link} onClick={evt => {
+                evt.preventDefault();
+                this.prevMonth();
+              }} href="" >
                 <div className={styles.linkcircle}></div>
                 <span><i className="fa fa-chevron-left" aria-hidden="true"></i></span>
               </a>
@@ -118,7 +112,10 @@ export default class Calendar extends Component {
                 {date.format('MMMM') + ' ' + date.format('YYYY')}
               </div>
             <div className={styles.next}>
-              <a className={styles.link} onClick={::this.nextMonth} href="" >
+              <a className={styles.link} onClick={evt => {
+                evt.preventDefault();
+                this.nextMonth();
+              }} href="" >
                 <div className={styles.linkcircle}></div>
                 <span><i className="fa fa-chevron-right" aria-hidden="true"></i></span>
               </a>
