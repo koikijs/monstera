@@ -33,7 +33,7 @@ export default class Calendar extends Component {
       className: 'nextMonth',
       swiping
     });
-    setTimeout( ()=> that.setState({className: '', swiping: false}), 250);
+    setTimeout( ()=> that.setState({className: '', swiping: false}), 300);
   }
 
   prevMonth(swiping) {
@@ -43,7 +43,7 @@ export default class Calendar extends Component {
       className: 'prevMonth',
       swiping
     });
-    setTimeout( ()=> that.setState({className: '', swiping: false}), 250);
+    setTimeout( ()=> that.setState({className: '', swiping: false}), 300);
   }
 
   swiped() {
