@@ -37,9 +37,10 @@ export default app => {
                   .chain()
                   .filter(item => item.count >= event.min)
                   .orderBy(['date'], ['asc'])
-                  .value()[0] || {});
+                  .value() || []);
             });
-        }
+        },
+        err => console.log(err)
       );
   });
 };

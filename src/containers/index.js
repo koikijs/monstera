@@ -5,5 +5,6 @@ export RegisterName from './RegisterName';
 export RegisterDuration from './RegisterDuration';
 export RegisterMember from './RegisterMember';
 export Event from './Event';
+export Availables from './Availables';
 
 export NotFound from './NotFound';

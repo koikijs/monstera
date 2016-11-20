@@ -8,7 +8,8 @@ export default {
     top: ''
   },
   events: {
-    event: '/events/:event'
+    event: '/events/:event',
+    availables: '/events/:event/availables'
   },
   apis: {
     auth: '/auth',
@@ -16,7 +17,8 @@ export default {
     users: '/apis/monstera/users',
     events: '/apis/monstera/events',
     attendees: '/apis/monstera/attendees',
-    candidates: '/apis/monstera/candidates'
+    candidates: '/apis/monstera/candidates',
+    org: '/orgs/:id'
   },
   login: {
     login: '/login'

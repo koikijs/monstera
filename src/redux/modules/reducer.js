@@ -9,6 +9,8 @@ import member from './member';
 import auth from './auth';
 import candidate from './candidate';
 import holiday from './holiday';
+import org from './org';
+import breadcrumb from './breadcrumb';
 
 import logger from './logger';
 
@@ -22,5 +24,7 @@ export default combineReducers({
   member,
   candidate,
   holiday,
+  org,
+  breadcrumb,
   logger,
 });

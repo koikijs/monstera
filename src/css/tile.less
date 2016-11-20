@@ -1,0 +1,68 @@
+@import "variables.less";
+
+.tile {
+  background-color: @base-color-back;
+  border-radius: 3px;
+  box-shadow: @shadow;
+  height: 175px;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+.logo {
+  width: 150px;
+  height: 150px;
+}
+
+.title {
+  margin: 0;
+  font-size: 2em;
+}
+
+@media (max-width: 767px) {
+  .tile {
+    width: 85%;
+    padding: 3%;
+    height: inherit;
+    margin-bottom: 5%;
+    font-size: 1.2em;
+  }
+  .logo {
+    width: 100px;
+    height: 100px;
+  }
+  .link {
+    flex-direction: row;
+  }
+  .title {
+    margin: 0;
+    font-size: 3em;
+  }
+}
+@media (max-width: 609px) {
+  .tile {
+    font-size: 2em;
+  }
+  .logo {
+    width: 80px;
+    height: 80px;
+  }
+}
+@media (max-width: 414px) {
+  .tile {
+    font-size: 2em;
+  }
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+}

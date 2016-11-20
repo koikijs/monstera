@@ -43,9 +43,9 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
-        "HOST": "sideroad.local",
+        "HOST": "localhost",
         "PORT": "3000",
-        "MONSTERA_HOST": "sideroad.local",
+        "MONSTERA_HOST": "localhost",
         "MONSTERA_PORT": "3000",
         "MONSTERA_PROTOCOL": "http"
       }
@@ -54,7 +54,7 @@
       "command": "node webpack/webpack-dev-server.js",
       "env": {
         "UV_THREADPOOL_SIZE": 100,
-        "HOST": "sideroad.local",
+        "HOST": "localhost",
         "NODE_PATH": "./src"
       }
     },

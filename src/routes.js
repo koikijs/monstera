@@ -7,6 +7,7 @@ import {load, isLoaded} from 'redux/modules/auth';
 import {
     App,
     Event,
+    Availables,
     NotFound,
   } from 'containers';
 
@@ -20,6 +21,7 @@ export default (store, res) => {
     <Route>
       <Route path="/" component={App} >
         <Route path={uris.events.event} component={Event} onEnter={login} />
+        <Route path={uris.events.availables} component={Availables} onEnter={login} />
         { /* Catch all route */ }
       </Route>
       <Route path="*" component={NotFound} status={404} />

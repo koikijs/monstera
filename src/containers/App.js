@@ -21,7 +21,7 @@ export default class App extends Component {
     const logo = require('../images/logo.png');
     const styles = require('../css/app.less');
     const {
-      auth
+      auth,
     } = this.props;
 
     return (

@@ -2,14 +2,12 @@
 
 .candidate {
   background-color: @base-color-back;
-  width: 25%;
-  margin-left: 5%;
-  float: left;
   border-radius: 3px;
   box-shadow: @shadow;
-  max-height: 570px;
   overflow-y: scroll;
   position: relative;
+  margin-top: 15px;
+  height: 350px;
 }
 
 .lead {
@@ -108,11 +106,15 @@
 
 @media (max-width: 767px) {
   .candidate {
-    width: 85%;
-    padding: 15px 2.5%;
-    height: 1.2em;
+    width: 70%;
+    padding: 3%;
+    height: inherit;
     margin-bottom: 5%;
     font-size: 1.2em;
+    margin-left: 5%;
+    margin-right: -5%;
+    margin-top: 0;
+    overflow-y: inherit;
   }
   .lead {
     top: 50%;
@@ -124,20 +126,12 @@
 }
 @media (max-width: 609px) {
   .candidate {
-    width: 85%;
-    padding: 15px 2.5%;
-    height: 2em;
-    margin-bottom: 5%;
     font-size: 2em;
   }
 }
 @media (max-width: 414px) {
   .candidate {
-    width: 85%;
-    padding: 15px 2.5%;
-    height: 1em;
-    margin-bottom: 5%;
-    font-size: 2em;
+    font-size: 1.5em;
   }
   .lead {
     top: 50%;
