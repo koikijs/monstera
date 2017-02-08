@@ -3,3 +3,4 @@ static/doc
 static/dist
 .DS_Store
 webpack-assets.json
+npm-debug.log
