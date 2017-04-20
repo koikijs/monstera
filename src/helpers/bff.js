@@ -31,10 +31,12 @@ export default app => {
                       const target = __.find(calc, {date: item.date});
                       if ( target ) {
                         target.count++;
+                        target.users.push( item.user.id );
                       } else {
                         calc.push({
                           date: item.date,
-                          count: 1
+                          count: 1,
+                          users: [ item.user.id ]
                         });
                       }
                     });
