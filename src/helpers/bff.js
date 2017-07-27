@@ -44,7 +44,13 @@ export default app => {
                     const noplans = __.reduce(json.items, (targets, candidate) => {
                       return __.reject(targets, target => target.user.id === candidate.user.id);
                     }, attendees.items);
-                    console.log(noplans);
+
+                    const counts = __.reduce(json.items, (targets, candidate) => {
+                      return {
+                        ...targets,
+                        [candidate.user.id]: targets[candidate.user.id] ? targets[candidate.user.id] + 1 : 1
+                      };
+                    }, {});
 
                     res.json({
                       candidates:
@@ -53,7 +59,8 @@ export default app => {
                           .filter(item => item.count >= event.min)
                           .orderBy(['date'], ['asc'])
                           .value() || [],
-                      noplans: noplans.map( noplan => noplan.user.id )
+                      noplans: noplans.map( noplan => noplan.user.id ),
+                      counts
                     });
 
                   });
