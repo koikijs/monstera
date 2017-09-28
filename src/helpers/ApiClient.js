@@ -18,6 +18,8 @@ const getHeader = (req) => {
 
   return {
     method: 'GET',
+    mode: 'cors',
+    credentials: 'include',
     headers: headers
   };
 };
@@ -36,6 +38,8 @@ const postHeader = (values, req) => {
   return {
     method: 'POST',
     headers: headers,
+    mode: 'cors',
+    credentials: 'include',
     body: JSON.stringify( values )
   };
 };
@@ -53,6 +57,8 @@ const patchHeader = (values, req) => {
 
   return {
     method: 'PATCH',
+    mode: 'cors',
+    credentials: 'include',
     headers: headers,
     body: JSON.stringify( values )
   };
@@ -72,6 +78,8 @@ const deleteHeader = (values, req) => {
 
   return {
     method: 'DELETE',
+    mode: 'cors',
+    credentials: 'include',
     headers: headers,
     body: JSON.stringify( values )
   };
