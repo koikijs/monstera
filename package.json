@@ -34,7 +34,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "MONSTERA_HOST": "monstera.herokuapp.com",
+        "MONSTERA_HOST": "monstera.now.sh",
         "MONSTERA_PROTOCOL": "https"
       }
     },
@@ -150,18 +150,8 @@
     "extract-text-webpack-plugin": "^0.9.1",
     "font-awesome": "^4.4.0",
     "font-awesome-webpack": "0.0.4",
-    "karma": "^0.13.10",
     "json-loader": "^0.5.4",
-    "karma-cli": "^0.1.1",
-    "karma-mocha": "^0.2.0",
-    "karma-mocha-reporter": "^1.1.1",
-    "karma-phantomjs-launcher": "^0.2.1",
-    "karma-sourcemap-loader": "^0.3.5",
-    "karma-webpack": "^1.7.0",
     "mocha": "^2.3.3",
-    "phantomjs": "^1.9.18",
-    "node-sass": "^3.4.2",
-    "phantomjs-polyfill": "0.0.1",
     "react-a11y": "^0.2.6",
     "react-addons-test-utils": "^0.14.0",
     "react-transform-catch-errors": "^1.0.0",

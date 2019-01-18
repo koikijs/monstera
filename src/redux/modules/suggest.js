@@ -90,7 +90,7 @@ export function load(query) {
     promise: (client) =>
       cache[query] ?
         new Promise(resolve=>resolve(cache[query])) :
-        client.fetchJSON('https://chaus.herokuapp.com' + uris.apis.users, 'GET', {
+        client.fetchJSON('https://chaus.now.sh' + uris.apis.users, 'GET', {
           name: '*' + query + '*',
           limit: 5
         }).then((res) => {

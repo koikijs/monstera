@@ -15,8 +15,8 @@ export default {
     });
 
     passport.use(new Strategy({
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientID: process.env.MONSTERA_GITHUB_CLIENT_ID,
+      clientSecret: process.env.MONSTERA_GITHUB_CLIENT_SECRET,
       callbackURL: config.global.url + '/auth/github/callback'
     }, (accessToken, refreshToken, profile, cb) => {
       return cb(null, profile);

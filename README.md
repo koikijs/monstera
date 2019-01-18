@@ -1,5 +1,5 @@
 # Event scheduler
-http://monstera.herokuapp.com
+http://monstera.now.sh
 
 # Contribute
 

@@ -9,18 +9,18 @@ export default app => {
     const client = new ApiClient(req);
 
     client
-      .fetchJSON('https://chaus.herokuapp.com' + uris.apis.attendees, 'GET', {
+      .fetchJSON('https://chaus.now.sh' + uris.apis.attendees, 'GET', {
         event: req.params.event,
         limit: 10000
       })
       .then(
         attendees => {
           client
-            .fetchJSON('https://chaus.herokuapp.com' + uris.normalize(uris.apis.event, { id: req.params.event}))
+            .fetchJSON('https://chaus.now.sh' + uris.normalize(uris.apis.event, { id: req.params.event}))
             .then(
               event => {
                 client
-                  .fetchJSON('https://chaus.herokuapp.com' + uris.apis.candidates, 'GET', {
+                  .fetchJSON('https://chaus.now.sh' + uris.apis.candidates, 'GET', {
                     event: req.params.event,
                     date: '[' + moment().format() + ',' + moment('2999-12-31').format() + ']',
                     limit: 10000

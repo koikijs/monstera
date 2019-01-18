@@ -70,13 +70,23 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+function fetchUser(client, query) {
+  return client.fetchJSON('https://chaus.now.sh' + uris.apis.users, 'GET', {
+    name: query.user,
+    limit: 1
+  }).then(res => res.items[0]);
+}
+
 export function load( query ) {
   return {
     types: [ LOAD, LOAD_SUCCESS, LOAD_FAIL ],
     promise: client =>
-      client.fetchJSON('https://chaus.herokuapp.com' + uris.apis.candidates, 'GET', Object.assign({
-        limit: 1000
-      }, query))
+      fetchUser(client, query)
+        .then(user =>
+          client.fetchJSON('https://chaus.now.sh' + uris.apis.candidates, 'GET', Object.assign(query, {
+            limit: 1000,
+            user: user.id
+          })))
   };
 }
 
@@ -85,13 +95,17 @@ export function select( query ) {
     query,
     types: [ SELECT, SELECT_SUCCESS, SELECT_FAIL ],
     promise: client =>
-      client
-        .fetchJSON('https://chaus.herokuapp.com' + uris.apis.candidates, 'POST', query)
-        .then(
-          () => load({
-            event: query.event,
-            user: query.user
-          }).promise(client))
+      fetchUser(client, query)
+        .then(user =>
+          client
+            .fetchJSON('https://chaus.now.sh' + uris.apis.candidates, 'POST', Object.assign(query, {user: user.id}))
+            .then(
+              () => load({
+                event: query.event,
+                user: query.user
+              }).promise(client)
+            )
+        )
   };
 }
 
@@ -100,12 +114,16 @@ export function unselect( query ) {
     query,
     types: [ UNSELECT, UNSELECT_SUCCESS, UNSELECT_FAIL ],
     promise: client =>
-      client
-        .fetchJSON('https://chaus.herokuapp.com' + uris.apis.candidates, 'DELETE', query)
-        .then(
-          () => load({
-            event: query.event,
-            user: query.user
-          }).promise(client))
+      fetchUser(client, query)
+        .then(user =>
+          client
+            .fetchJSON('https://chaus.now.sh' + uris.apis.candidates, 'DELETE', Object.assign(query, {user: user.id}))
+            .then(
+              () => load({
+                event: query.event,
+                user: query.user
+              }).promise(client)
+            )
+          )
   };
 }
