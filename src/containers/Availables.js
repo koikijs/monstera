@@ -20,7 +20,7 @@ import { asyncConnect } from 'redux-connect';
     const promises = [];
     promises.push(dispatch(loadCandidate({
       event: params.event,
-      user: getState().auth.data.name,
+      user: getState().auth.data.id,
       date: '[' + moment.utc().startOf('date').format('YYYY-MM-DD') + ',' + moment.utc().add(1, 'year').startOf('date').format('YYYY-MM-DD') + ']'
     })));
     promises.push(dispatch(loadHoliday()));
@@ -81,7 +81,7 @@ export default class Availables extends Component {
             onDelete={
               date =>
                 unselect({
-                  user: auth.name,
+                  user: auth.id,
                   event,
                   date: moment.utc(date).format()
                 })
@@ -96,13 +96,13 @@ export default class Availables extends Component {
             date => {
               if ( __.some(selected, item => moment.utc(item).startOf('date').isSame(date)) ) {
                 unselect({
-                  user: auth.name,
+                  user: auth.id,
                   event,
                   date: moment.utc(date).format()
                 });
               } else {
                 select({
-                  user: auth.name,
+                  user: auth.id,
                   event,
                   date: moment.utc(date).format()
                 });

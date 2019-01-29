@@ -1,6 +1,8 @@
+import ApiClient from '../helpers/ApiClient';
 import passport from 'passport';
 import { Strategy } from 'passport-github2';
 import config from '../config';
+import uris from '../uris';
 
 export default {
 
@@ -48,10 +50,33 @@ export default {
       }
       res.status(401).json({});
     }, (req, res) => {
-      res.status(200).json({
-        name: req.user.username,
-        icon: req.user._json.avatar_url
-      });
+      const client = new ApiClient(req);
+      client
+        .fetchJSON('https://chaus.now.sh' + uris.apis.users, 'GET', {
+          name: req.user.username,
+          limit: 1
+        })
+        .then(users => {
+          if (users.items.length) {
+            res.status(200).json({
+              id: users.items[0].id,
+              name: req.user.username,
+              icon: req.user._json.avatar_url
+            });
+          } else {
+            client
+              .fetchJSON('https://chaus.now.sh' + uris.apis.users, 'POST', {
+                name: req.user.username
+              })
+              .then(user => {
+                res.status(200).json({
+                  id: user.id,
+                  name: req.user.username,
+                  icon: req.user._json.avatar_url
+                })
+              })
+          }
+        });
     });
   }
 };
